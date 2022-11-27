@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".AboutActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/intro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome To The Best Food In the City"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+
+            <ImageView
+
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="179dp"
+                app:srcCompat="@drawable/baeb"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mystory"
+                android:text="Our Story"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sto"
+                android:text="We love what can happen around the restaurant table. And since 1998 we’ve
+                 been committed to empowering that experience. From helping restaurants of all sizes thrive,
+                  to enabling diners to find and book the perfect table for every occasion, our story is one
+                  of human connection—among diners and restaurants, and between restaurants and their communities.
+                Now, we’re growing globally like never before, and continuing to lead the conversation in the tech
+                and restaurant spaces with products that anticipate the ever-evolving needs of both restaurants and diners.
+                With our passion for hospitality, we take pride in bringing together people and the restaurants they love
+                 in the moments that matter. Pull up a chair and join us."
+                android:textSize="14dp"
+                android:textStyle="italic"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/aim"
+                android:text="Our Aim"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/goal"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/bread"
+                android:text="We proudly support Share Our Strength’s No Kid Hungry campaign.Together, our goal is to ensure that all Zambian children get the healthy food they need to live and grow everyday."
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/myy"
+                android:text=""
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/body"
+            android:text="Healthy eating is not about deprivation, following strict nutrition rules
+             or starving yourself to lose weight. It is about getting healthy and staying healthy
+             by making smarter food choices, including watching portion sizes, limiting fat consumption,eating natural, whole
+            foods like fruits, veggies and whole grains and reducing processed food in the diet.
+            Moderation is one of the foundations of a healthy diet, and portion control will help you enjoy the foods you love in healthier ways. Serving sizes are bigger than ever before in restaurants, and many people do not know the proper portion sizes for foods. For example,
+             one serving of pasta is about half of a cup cooked, but the serving sizes at restaurants
+             are often many times that amount. To control portion sizes and get the right amount of
+              nutrients each meal, divide your plate mentally into quarters. One quarter of the plate
+              should be complex carbohydrates, like pasta or potatoes. One
+
+           quarter should be meat or another protein and the rest should be devoted to vegetables.
+
+"
+            android:textSize="14dp"
+
+            android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13dp"
+                android:text="DISCOVER\t\nDining Rewards\nPrivate Dining\nReserve for Others\nCuisines Near Me
+                \nRestaurants Near Me\nDelivery Near Me\nCuisines\nRestaurants Open Now"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
