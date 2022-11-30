@@ -11,10 +11,10 @@
         android:id="@+id/bucket"
         android:layout_width="wrap_content"
         android:layout_height="29dp"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/roundblackfilled"
-        android:text="5"
+        android:text="0"
         android:textAlignment="center"
         android:textColor="#82DA1C"
 

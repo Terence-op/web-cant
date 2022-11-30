@@ -2,6 +2,7 @@ package food.app.demo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,23 +23,22 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ImageViewHolder>
     private OnFoofItemSelected mFoodSelected;
 
 
-
-
-    public NewAdapter(Context context, List<Food> uploads,OnFoofItemSelected foodSelected){
+    public NewAdapter(Context context, List<Food> uploads, OnFoofItemSelected foodSelected) {
         mContext = context;
         mUploads = uploads;
         mFoodSelected = foodSelected;
     }
+
     @NonNull
     @Override
     public NewAdapter.ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.food_single_item,parent,false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.food_single_item, parent, false);
         return new ImageViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NewAdapter.ImageViewHolder holder, int position) {
-        Food  uploadCurrent = mUploads.get(position);
+        Food uploadCurrent = mUploads.get(position);
         holder.NameOfFood.setText(uploadCurrent.getName());
         holder.priceOfFood.setText(uploadCurrent.getPrice());
         Picasso.with(mContext)
@@ -57,18 +57,18 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ImageViewHolder>
 
     public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-             TextView NameOfFood;
-            TextView priceOfFood;
-            ImageView imageUri;
+        TextView NameOfFood;
+        TextView priceOfFood;
+        ImageView imageUri;
 
 
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
-            
+
             //registering the onClick
             itemView.setOnClickListener(this);
-            
-            NameOfFood= itemView.findViewById(R.id.name);
+
+            NameOfFood = itemView.findViewById(R.id.name);
             priceOfFood = itemView.findViewById(R.id.price);
             imageUri = itemView.findViewById(R.id.imageProduct);
         }
@@ -79,8 +79,9 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ImageViewHolder>
 
             int position = getAdapterPosition();
             Food food = mUploads.get(position);
+            food.setSelected(!food.isSelected());
+            itemView.setBackgroundColor(food.isSelected() ? itemView.getResources().getColor(R.color.colorPrimary) : 0x00000000);
             mFoodSelected.OnOrder(food);
-
 
         }
     }

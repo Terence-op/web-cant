@@ -3,6 +3,7 @@ package food.app.demo;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -21,19 +22,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.ObjDoubleConsumer;
 
 public class MainMealFragment extends Fragment implements OnFoofItemSelected {
     private RecyclerView mRecyclerV;
+    private TextView mBucket;
     private NewAdapter mAdapter;
-
     private FloatingActionButton mAddFab;
 
     private List<Food> mUploads;
-    private ArrayList<Food> SelectedFoods = new ArrayList<>();
+    private final ArrayList<Food> mSelectedFoods = new ArrayList<>();
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -45,8 +44,10 @@ public class MainMealFragment extends Fragment implements OnFoofItemSelected {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerV =(RecyclerView)getView().findViewById(R.id.recyclerViewID);
-        mAddFab = (FloatingActionButton)getView().findViewById(R.id.fab);
+        mRecyclerV = (RecyclerView) getView().findViewById(R.id.recyclerViewID);
+        mAddFab = (FloatingActionButton) getView().findViewById(R.id.fab);
+
+        mBucket = getView().findViewById(R.id.bucket);
 
         mRecyclerV.setHasFixedSize(true);
 
@@ -56,13 +57,12 @@ public class MainMealFragment extends Fragment implements OnFoofItemSelected {
         mUploads = new ArrayList<>();
 
 
-
         db.collection("Users").document("mainMeal").collection("main").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 mUploads.clear();
-                for(DocumentSnapshot docs: value.getDocuments()){
-                    Food food =  docs.toObject(Food.class);
+                for (DocumentSnapshot docs : value.getDocuments()) {
+                    Food food = docs.toObject(Food.class);
 
                     mUploads.add(food);
                 }
@@ -73,74 +73,48 @@ public class MainMealFragment extends Fragment implements OnFoofItemSelected {
             }
         });
 
-        mAdapter = new NewAdapter(getContext(),mUploads,this);
+        mAdapter = new NewAdapter(getContext(), mUploads, this);
 
         mRecyclerV.setAdapter(mAdapter);
 
+        mAddFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Intent intent = new Intent(getContext(), Oder.class);
+                intent.putExtra("selectedFoods", mSelectedFoods);
+                startActivity(intent);
 
-//            @Override
-//            public void onClick(View view, String name,String price) {
-//
-//
-////                Intent intent = new Intent(getContext(),Oder.class);
-////                Bundle args = new Bundle();
-////                args.putSerializable("ARRAYLIST",(Serializable)SelectedFoods);
-////                intent.putExtra("myList",SelectedFoods);
-////                startActivity(intent);
-//
-//
-//            }
-
-
-
+            }
+        });
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_meal, container, false);
-
-
-    }
-    public void myData(Food food){
-        String Name = food.getName();
-        String Price = food.getPrice();
-        Intent intent = new Intent(getContext(),Oder.class);
-        intent.putExtra("name",Name);
-        intent.putExtra("price",Price);
-        startActivity(intent);
-
-
 
     }
 
 
     @Override
     public void OnOrder(Food food) {
-        if (!SelectedFoods.contains(food)) {
 
+        if (!mSelectedFoods.contains(food)) {
 
-        String nameFood = food.getName();
-        String priceFood = food.getName();
+            mSelectedFoods.add(food);
 
-            List<String> list = new ArrayList<String>();
-            list.add(nameFood);
-            list.add(priceFood);
-           //try using database
+            Toast.makeText(getContext(), "Added " + food.getName(), Toast.LENGTH_SHORT).show();
 
+        } else {
 
-            Toast.makeText(getContext(),list.get(0),Toast.LENGTH_SHORT).show();
+            mSelectedFoods.remove(food);
 
+            Toast.makeText(getContext(), "Removed " + food.getName(), Toast.LENGTH_SHORT).show();
 
-        mAddFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myData(food);
-            }
-        });
         }
+
+        mBucket.setText(String.valueOf(mSelectedFoods.size()));
     }
 }

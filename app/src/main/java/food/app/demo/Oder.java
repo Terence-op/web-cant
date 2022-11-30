@@ -11,24 +11,32 @@ import java.util.ArrayList;
 
 public class Oder extends AppCompatActivity {
     private TextView Price;
- Bundle bundle ;
+    private ArrayList<Food> foods;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oder);
+
         Price = findViewById(R.id.pri);
 
         bundle = getIntent().getExtras();
 
-        String nn = bundle.getString("name");
-        String pp = bundle.getString("price");
+        foods = (ArrayList<Food>) bundle.getSerializable("selectedFoods");
 
 
-        Toast.makeText(this, pp, Toast.LENGTH_LONG).show();
-        Toast.makeText(this, nn, Toast.LENGTH_LONG).show();
+        double total = 0;
 
-        Price.setText(nn +"   "+"K" +pp);
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Food food : foods) {
+            total += Double.parseDouble(food.getPrice());
+
+            stringBuilder.append(food.getName() + " ----> " + "K" + food.getPrice() +"\n");
+        }
+
+        Price.setText(stringBuilder);
 
 
     }

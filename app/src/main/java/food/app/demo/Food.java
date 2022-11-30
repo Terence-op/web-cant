@@ -1,9 +1,14 @@
 package food.app.demo;
 
-public class Food {
+
+import java.io.Serializable;
+
+public class Food implements Serializable {
     private String name;
     private String price;
     private String uri;
+
+    private boolean isSelected;
 
     public Food() {
     }
@@ -36,6 +41,15 @@ public class Food {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }
 
